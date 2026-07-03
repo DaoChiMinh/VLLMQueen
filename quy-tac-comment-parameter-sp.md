@@ -51,7 +51,7 @@ BaoCao: <Tên báo cáo> | <tham số định danh>
 
 ## B.2. Khối BaoCao — đơn vị khai báo báo cáo
 
-Một  PROCEDURE  có thể phục vụ **nhiều báo cáo** khác nhau (phân biệt bởi giá trị tham số như @M_Load). Mỗi báo cáo khai một khối `BaoCao` gồm 3 dòng:
+Một  PROCEDURE  có thể phục vụ **nhiều báo cáo** khác nhau (phân biệt bởi giá trị tham số như @M_Load,...). Mỗi báo cáo khai một khối `BaoCao` gồm 3 dòng:
 
 ### Dòng 1 — `BaoCao: <Tên> | <tham số định danh>`
 
