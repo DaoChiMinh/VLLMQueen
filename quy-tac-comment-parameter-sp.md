@@ -1,10 +1,6 @@
 # QUY TẮC COMMENT STORED PROCEDURE
 ## Phục vụ AI Assistant tra cứu báo cáo ERP
 
-**Phiên bản:** 1.1
-**Thay đổi so với 1.0:** Bỏ trường BangNguon (parser tự trích từ thân SP). META chuyển sang khối BaoCao đa biến thể — một SP có thể khai báo nhiều báo cáo. Thêm nhãn [BC] cho tham số định danh báo cáo.
-
----
 
 ## 1. Khối META cấp SP (đặt ngay sau dòng PROCEDURE)
 
@@ -24,7 +20,7 @@ BaoCao: <Tên báo cáo khác> | <tham số định danh>
 
 Quy tắc:
 
-- Dòng `BaoCao:` gồm **tên báo cáo** (theo đúng tên nghiệp vụ người dùng biết), dấu `|`, rồi các cặp `@ThamSo='giá trị'` định danh biến thể, cách nhau dấu phẩy nếu nhiều
+- Dòng `BaoCao:` gồm **tên báo cáo** (theo đúng tên nghiệp vụ người dùng biết), dấu `|`, rồi các cặp `@ThamSo='giá trị'` định danh biến thể, cách nhau dấu phẩy nếu nhiều Ví dụ: @M_Load = 1, @M_Kieu = 2
 - `TuKhoa`: từ đồng nghĩa, viết tắt, tiếng Anh... người dùng hay dùng khi hỏi ĐÚNG báo cáo này
 - `ViDu`: 1-3 ví dụ mapping câu hỏi → tham số, khuyến khích có
 - SP chỉ có một báo cáo → viết đúng một khối BaoCao (format thống nhất, không có ngoại lệ)
