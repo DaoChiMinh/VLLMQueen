@@ -131,8 +131,31 @@ Phụ thuộc phức tạp (bảng trung gian, nhiều-nhiều): mô tả bằng
 
 ---
 
-## 3. Ví dụ mẫu hoàn chỉnh (SP đa báo cáo)
+## 3. Ví dụ mẫu hoàn chỉnh 
+```sql
+ALTER PROCEDURE [dbo].[CP_APPNBBE_TonKhoVT]
+/*===META===
+BaoCao: Bảng kê tồn kho vật tư
+  TuKhoa: bảng kê tồn kho, danh sách tồn kho, tồn kho chi tiết, liệt kê tồn
+  ViDu: "Bảng kê tồn kho xi măng cuối tháng 6" -> @M_Load='1', @M_Ngay_ct2='20260630', @M_Ma_Nhom_VT='XM'
 
+===END META===*/
+	@M_Load NVARCHAR(50) = '1'          -- [SYS] Chế độ tải: 1=tải mới, 0=làm mới cache
+	,@M_Ngay_ct1 SMALLDATETIME          -- Ngày bắt đầu kỳ (yyyyMMdd)
+	,@M_Ngay_ct2 SMALLDATETIME          -- Ngày kết thúc kỳ / ngày chốt tồn (yyyyMMdd)
+	,@M_Ma_Dvcs NVARCHAR(50) = '01'     -- Mã đơn vị cơ sở. tra DMDVCS(Ma_Dvcs; tìm: Ten_Dvcs). Mặc định='01'
+	,@M_Ma_DV NVARCHAR(50) = ''         -- Mã đơn vị. tra DMDV(Ma_DV; tìm: Ten_DV, Dia_Chi; phụ thuộc: Ma_Dvcs=@M_Ma_Dvcs). Mặc định='' (tất cả)
+	,@M_Ma_Kho NVARCHAR(500) = ''       -- DS mã kho (phân cách dấu phẩy). tra DMKHO(Ma_Kho; tìm: Ten_Kho; lọc: Status='1'; phụ thuộc: Ma_DV=@M_Ma_DV). Mặc định='' (tất cả)
+	,@M_Ma_Nhom_VT NVARCHAR(50) = ''    -- Mã nhóm vật tư. tra DMNVT(Ma_Nhom_VT; tìm: Ten_Nhom_VT). Mặc định='' (tất cả)
+	,@M_Ma_VT NVARCHAR(500) = ''        -- DS mã vật tư (phân cách dấu phẩy). tra DMVT(Ma_VT; tìm: Ten_VT, Ma_Vach; lọc: Status='1'; phụ thuộc: Ma_Nhom_VT=@M_Ma_Nhom_VT). Mặc định='' (tất cả)
+	,@M_User_Name NVARCHAR(100) = 'ABC' -- [SYS] User đăng nhập, app tự truyền, dùng phân quyền
+AS
+BEGIN
+	SET NOCOUNT ON;
+	-- Dev tự IF ELSE theo @M_Load
+	...
+END
+```
 ```sql
 ALTER PROCEDURE [dbo].[CP_APPNBBE_TonKhoVT]
 /*===META===
@@ -164,7 +187,38 @@ BEGIN
 	...
 END
 ```
+```sql
+ALTER PROCEDURE [dbo].[CP_APPNBBE_TonKhoVT]
+/*===META===
+BaoCao: Bảng kê nhập vật tư | @M_Load='1', @M_Kieu='N'
+  TuKhoa: bảng kê nhập, nhập kho, phiếu nhập, hàng nhập về
+  ViDu: "Bảng kê nhập vật tư tháng 6" -> @M_Load='1', @M_Kieu='N', @M_Ngay_ct1='20260601', @M_Ngay_ct2='20260630'
 
+BaoCao: Bảng kê xuất vật tư | @M_Load='1', @M_Kieu='X'
+  TuKhoa: bảng kê xuất, xuất kho, phiếu xuất, hàng xuất đi
+  ViDu: "Xuất kho tháng 6 của kho HN" -> @M_Load='1', @M_Kieu='X', @M_Ma_Kho='KHN'
+
+BaoCao: Tổng hợp nhập xuất theo vật tư | @M_Load='2', @M_Kieu=''
+  TuKhoa: tổng hợp nhập xuất, NX theo vật tư
+  ViDu: "Tổng nhập xuất từng mặt hàng quý 2" -> @M_Load='2', @M_Ngay_ct1='20260401', @M_Ngay_ct2='20260630'
+===END META===*/
+	@M_Load NVARCHAR(50) = '1'   -- [BC] Mã báo cáo, xác định bởi biến thể trong META
+	,@M_Kieu NVARCHAR(10) = ''   -- [BC] Kiểu nhập/xuất, xác định bởi biến thể trong META
+	,@M_Ngay_ct1 SMALLDATETIME          -- Ngày bắt đầu kỳ (yyyyMMdd)
+	,@M_Ngay_ct2 SMALLDATETIME          -- Ngày kết thúc kỳ / ngày chốt tồn (yyyyMMdd)
+	,@M_Ma_Dvcs NVARCHAR(50) = '01'     -- Mã đơn vị cơ sở. tra DMDVCS(Ma_Dvcs; tìm: Ten_Dvcs). Mặc định='01'
+	,@M_Ma_DV NVARCHAR(50) = ''         -- Mã đơn vị. tra DMDV(Ma_DV; tìm: Ten_DV, Dia_Chi; phụ thuộc: Ma_Dvcs=@M_Ma_Dvcs). Mặc định='' (tất cả)
+	,@M_Ma_Kho NVARCHAR(500) = ''       -- DS mã kho (phân cách dấu phẩy). tra DMKHO(Ma_Kho; tìm: Ten_Kho; lọc: Status='1'; phụ thuộc: Ma_DV=@M_Ma_DV). Mặc định='' (tất cả)
+	,@M_Ma_Nhom_VT NVARCHAR(50) = ''    -- Mã nhóm vật tư. tra DMNVT(Ma_Nhom_VT; tìm: Ten_Nhom_VT). Mặc định='' (tất cả)
+	,@M_Ma_VT NVARCHAR(500) = ''        -- DS mã vật tư (phân cách dấu phẩy). tra DMVT(Ma_VT; tìm: Ten_VT, Ma_Vach; lọc: Status='1'; phụ thuộc: Ma_Nhom_VT=@M_Ma_Nhom_VT). Mặc định='' (tất cả)
+	,@M_User_Name NVARCHAR(100) = 'ABC' -- [SYS] User đăng nhập, app tự truyền, dùng phân quyền
+AS
+BEGIN
+	SET NOCOUNT ON;
+	-- Dev tự IF ELSE theo @M_Load
+	...
+END
+```
 **Đọc thử theo góc nhìn AI:**
 
 - Người dùng hỏi "cho xem NXT quý 2" → retrieval match biến thể `Tổng hợp nhập xuất tồn` (nhờ từ khóa "NXT") → @M_Load='3' lấy từ META, AI chỉ còn lo điền ngày + các bộ lọc
