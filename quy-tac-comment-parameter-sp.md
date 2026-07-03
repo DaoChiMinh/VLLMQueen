@@ -336,9 +336,3 @@ Nếu người dùng chỉ hỏi "cho xem NXT" (thiếu thời gian): @M_Ngay_ct
 | `Mặc định=` | Cuối comment | Viết hoa M, có dấu bằng |
 
 **Dấu phân cách:** trong `tra(...)` dùng `;` giữa các thành phần — các phần lớn của comment ngăn bằng `. ` (chấm + khoảng trắng) — trong ngoặc đơn mô tả, nhiều thông tin cách nhau `,`
-
-## E.3. Những gì KHÔNG cần viết (parser tự làm)
-
-- Danh sách bảng nguồn của  PROCEDURE  → parser trích từ các cụm `tra` + FROM/JOIN trong thân  PROCEDURE 
-- Nghĩa của tên bảng danh mục ở tầng hệ thống → nếu cần, khai một lần bằng extended property của SQL Server (` PROCEDURE _addextendedproperty`), không lặp trong từng  PROCEDURE 
-- Kiểu dữ liệu, giá trị default SQL của tham số → parser đọc từ chính dòng khai báo
