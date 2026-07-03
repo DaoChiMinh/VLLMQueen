@@ -1,7 +1,6 @@
 # QUY TẮC VIẾT META & COMMENT THAM SỐ STORED PROCEDURE
 ## Phục vụ AI Assistant tra cứu báo cáo ERP
 
-| | |
 |---|---|
 | **Phiên bản** | 1.2 |
 | **Phạm vi áp dụng** | Các  PROCEDURE  báo cáo (nhóm CP_APP*) |
