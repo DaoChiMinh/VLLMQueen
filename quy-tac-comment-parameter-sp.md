@@ -4,7 +4,7 @@
 | | |
 |---|---|
 | **Phiên bản** | 1.2 |
-| **Phạm vi áp dụng** | Các  PROCEDURE  báo cáo (nhóm CP_APP*) |
+| **Phạm vi áp dụng** | Các  PROCEDURE  báo cáo (nhóm CP_*) |
 | **Đối tượng đọc** | Dev viết/bảo trì stored procedure |
 
 ---
