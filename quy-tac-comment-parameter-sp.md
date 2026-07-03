@@ -107,7 +107,7 @@ Phần `(chú thích)` sau giá trị giúp người đọc và AI hiểu ý ngh
 
 ### 2.5. `phụ thuộc:` — Ràng buộc liên tham số
 
-D�ng khi giá trị hợp lệ của tham số này phụ thuộc tham số khác (nhóm vật tư → vật tư, đơn vị → kho...):
+Dạng khi giá trị hợp lệ của tham số này phụ thuộc tham số khác (nhóm vật tư → vật tư, đơn vị → kho...):
 
 ```sql
 ,@M_Ma_Nhom_VT NVARCHAR(50) = ''  -- Mã nhóm vật tư. tra DMNVT(Ma_Nhom_VT; tìm: Ten_Nhom_VT). Mặc định='' (tất cả)
