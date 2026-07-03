@@ -2,9 +2,9 @@
 ## Phục vụ AI Assistant tra cứu báo cáo ERP
 
 
-## 1. Khối META cấp SP (đặt ngay sau dòng PROCEDURE)
+## 1. Khối META cấp PROCEDURE (đặt ngay sau dòng PROCEDURE)
 
-Một SP có thể phục vụ **nhiều báo cáo** khác nhau, phân biệt bởi giá trị của một hoặc nhiều tham số (thường là @M_Load). Mỗi báo cáo khai một khối `BaoCao`:
+Một PROCEDURE có thể phục vụ **nhiều báo cáo** khác nhau, phân biệt bởi giá trị của một hoặc nhiều tham số (thường là @M_Load). Mỗi báo cáo khai một khối `BaoCao`:
 
 ```sql
 /*===META===
@@ -23,8 +23,8 @@ Quy tắc:
 - Dòng `BaoCao:` gồm **tên báo cáo** (theo đúng tên nghiệp vụ người dùng biết), dấu `|`, rồi các cặp `@ThamSo='giá trị'` định danh biến thể, cách nhau dấu phẩy nếu nhiều Ví dụ: @M_Load = 1, @M_Kieu = 2
 - `TuKhoa`: từ đồng nghĩa, viết tắt, tiếng Anh... người dùng hay dùng khi hỏi ĐÚNG báo cáo này
 - `ViDu`: 1-3 ví dụ mapping câu hỏi → tham số, khuyến khích có
-- SP chỉ có một báo cáo → viết đúng một khối BaoCao (format thống nhất, không có ngoại lệ)
-- Mọi biến thể dùng chung trọn bộ tham số của SP — thân SP tự IF ELSE theo tham số định danh
+- PROCEDURE chỉ có một báo cáo → viết đúng một khối BaoCao (format thống nhất, không có ngoại lệ)
+- Mọi biến thể dùng chung trọn bộ tham số của PROCEDURE — thân PROCEDURE tự IF ELSE theo tham số định danh
 
 ---
 
@@ -226,7 +226,7 @@ END
 ## 4. Checklist khi viết/sửa SP
 
 - [ ] Có khối `/*===META===` với ít nhất một khối `BaoCao` (tên | tham số định danh + TuKhoa + ViDu)
-- [ ] SP nhiều báo cáo → mỗi báo cáo một khối BaoCao, từ khóa riêng không trộn lẫn
+- [ ] PROCEDURE nhiều báo cáo → mỗi báo cáo một khối BaoCao, từ khóa riêng không trộn lẫn
 - [ ] Tham số định danh báo cáo (như @M_Load) gắn nhãn `[BC]`
 - [ ] Tham số hệ thống gắn nhãn `[SYS]`
 - [ ] Mỗi tham số một dòng, comment `--` cùng dòng
@@ -234,7 +234,7 @@ END
 - [ ] Tham số mã danh mục có `tra Bảng(khóa; tìm: ...)` — khai đủ các cột người dùng có thể mô tả
 - [ ] Tham số ràng buộc nhau → khai `phụ thuộc:` (chỉ cấp liền trên)
 - [ ] Soát từng tham số nghiệp vụ: *"tự điền mặc định không hỏi có ổn không?"* → Ổn: viết `Mặc định=X`. Không: BỎ TRỐNG (= bắt buộc, AI hỏi)
-- [ ] `Mặc định=` phản ánh ĐÚNG hành vi thật trong thân SP (kiểm tra WHERE trước khi ghi `Mặc định='' (tất cả)`)
+- [ ] `Mặc định=` phản ánh ĐÚNG hành vi thật trong thân PROCEDURE (kiểm tra WHERE trước khi ghi `Mặc định='' (tất cả)`)
 
 ---
 
